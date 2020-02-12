@@ -4,17 +4,18 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          name: 'commons',
-          chunks: 'initial',
-          minChunks: 2
-        }
-      }
-    }
-  },
+  mode: 'production',
+  // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       commons: {
+  //         name: 'commons',
+  //         chunks: 'initial',
+  //         minChunks: 2
+  //       }
+  //     }
+  //   }
+  // },
   plugins: [
     new UglifyJSPlugin(),
     new webpack.DefinePlugin({

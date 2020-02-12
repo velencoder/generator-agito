@@ -1,13 +1,19 @@
-import _ from 'lodash';
-
-if (process.env.NODE_ENV !== 'production') {
-  console.log('Looks like we are in development mode!');
+if (process.env.NODE_ENV !== "production") {
+  console.log("Looks like we are in development mode!");
 }
 
-function component() {
-  var element = document.createElement('pre');
+function getComponent() {
+  return import(/* webpackChunkName: "lodash" */ "lodash")
+    .then(_ => {
+      var element = document.createElement("div");
 
-  return element;
+      element.innerHTML = _.join(["Hello", "webpack"], " ");
+
+      return element;
+    })
+    .catch(error => "An error occurred while loading the component");
 }
 
-document.body.appendChild(component());
+getComponent().then(component => {
+  document.body.appendChild(component);
+});
