@@ -6,8 +6,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // 如果预先定义过环境变量，就将其赋值给`ASSET_PATH`变量，否则赋值为根目录
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
-
-
 module.exports = {
   entry: {
     app: './src/index.js'
@@ -29,7 +27,13 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Caching'
+      title: 'Caching',
+      filename: 'index.html',
+      template: path.resolve(__dirname, '../public/index.html')　,
+      minify: {
+        removeComments: true, //去注释
+        collapseWhitespace: true //去空格
+      }
     }),
     new webpack.DefinePlugin({
       'process.env.ASSET_PATH': JSON.stringify(ASSET_PATH)
