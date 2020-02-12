@@ -1,6 +1,6 @@
 {
-  "name": "generator-agito",
-  "version": "0.0.1",
+  "name": "generator-agito-common",
+  "version": "0.0.3",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {

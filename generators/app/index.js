@@ -1,4 +1,6 @@
 const Generator = require('yeoman-generator');
+const path = require('path');
+const glob = require('glob');
 
 module.exports = class extends Generator {
   prompting() {
@@ -13,15 +15,18 @@ module.exports = class extends Generator {
       this.answers = answers;
     });
   }
-  writing(){
-    const templates = []
+  writing() {
+    const templates = glob.sync('**/**', {
+      cwd: path.join(__dirname, 'templates'),
+      dot: true
+    });
 
-    templates.forEach(item =>{
+    templates.forEach(item => {
       this.fs.copyTpl(
         this.templatePath(item),
         this.destinationPath(item),
         this.answers
-      )
-    })
+      );
+    });
   }
 };
